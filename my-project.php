@@ -1,6 +1,10 @@
 <?php 
 session_start();
 require "config.php";
+
+ if( ! isset($_SESSION['auth']) && $_SESSION['auth'] !=1 ) 
+ 	header('location:signin.php');
+
 $user_id = $_SESSION['user_id'];
 
 $sql = "SELECT * FROM project WHERE user_id='$user_id'";
@@ -59,11 +63,11 @@ $result = mysql_query($sql);
 
 							<ul class="dropdown-menu m-t-sm animated fadeInLeft"> 
 								<span class="arrow top"></span> 
-								<li> <a href="#">Settings</a> </li> 
+								<!-- <li> <a href="#">Settings</a> </li> 
 								<li> <a href="profile.html">Profile</a> </li> 
 								<li> <a href="#"> <span class="badge bg-danger pull-right">3</span> Notifications </a> </li> 
 								<li class="divider"></li> 
-								<li> <a href="docs.html">Help</a> </li> 
+								<li> <a href="docs.html">Help</a> </li>  -->
 								<li> <a href="logout.php">Logout</a> </li> 
 							</ul> 
 
@@ -74,15 +78,15 @@ $result = mysql_query($sql);
 						</div> 
 
 						<div class="nav-msg"> 
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+							<!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 								<b class="badge badge-white count-n">2</b> 
-							</a> 
+							</a>  -->
 
 							<section class="dropdown-menu m-l-sm pull-left animated fadeInRight"> 
 								
 								<div class="arrow left"></div> 
 								
-								<section class="panel bg-white"> 
+								<!-- <section class="panel bg-white"> 
 									
 									<header class="panel-heading"> 
 										<strong>You have <span class="count-n">2</span> notifications</strong> 
@@ -111,7 +115,7 @@ $result = mysql_query($sql);
 										</a> 
 										<a href="#">See all the notifications</a> 
 									</footer> 
-								</section> 
+								</section>  -->
 							</section> 
 						</div> 
 					</div> <!-- / user --> 
@@ -123,8 +127,8 @@ $result = mysql_query($sql);
 							 
 							
 							<li> <a href="timeline.php"> <i class="icon-time"></i> <span>Timeline</span> </a> </li> 
-							<li> <a href="create-project.php"> <i class="icon-time"></i> <span>Create</span> </a> </li> 
-							<li> <a href="my-project.php"> <i class="icon-time"></i> <span>My Project</span> </a> </li> 
+							<li> <a href="create-project.php"> <i class="icon-bolt"></i> <span>Create</span> </a> </li> 
+							<li> <a href="my-project.php"> <i class="icon-picture"></i> <span>My Project</span> </a> </li> 
 						</ul> 
 					</nav> <!-- / nav --> <!-- note --> 
 					<div class="bg-danger wrapper hidden-vertical animated rollIn text-sm"> 

@@ -1,6 +1,9 @@
 <?php 
 session_start();
 require "config.php";
+ if( ! isset($_SESSION['auth']) && $_SESSION['auth'] !=1 ) 
+  header('location:signin.php');
+  
 $user_id = $_SESSION['user_id'];
 
 if (isset($_POST['update'])) {
@@ -10,8 +13,9 @@ if (isset($_POST['update'])) {
   $location = $_POST['location'];
   $fb = $_POST['fb'];
   $twitter = $_POST['twitter'];
+  $trans_type = $_POST['paypal'];
 
-  $ins = "UPDATE profile SET name='$name', biography='$biography', location='$location', fb='$fb', twitter='$twitter' WHERE user_id = '$user_id'";
+  $ins = "UPDATE profile SET name='$name', biography='$biography', location='$location', fb='$fb', twitter='$twitter', trans_type='$trans_type' WHERE user_id = '$user_id'";
 
   $result = mysql_query($ins);
 
@@ -206,13 +210,13 @@ if (isset($_POST['update'])) {
               
               <div class="nav-msg">
                 
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   
                   <b class="badge badge-white count-n">
                     2
                   </b>
                   
-                </a>
+                </a> -->
                 
                 
                 <section class="dropdown-menu m-l-sm pull-left animated fadeInRight">
@@ -222,10 +226,10 @@ if (isset($_POST['update'])) {
                   </div>
                   
                   
-                  <section class="panel bg-white">
+                  <!-- <section class="panel bg-white">
                     
                     
-                    <!-- <header class="panel-heading">
+                    <header class="panel-heading">
                       
                       <strong>
                         You have 
@@ -235,7 +239,7 @@ if (isset($_POST['update'])) {
                         notifications
                       </strong>
                       
-                    </header> -->
+                    </header>
                     
                     
                     <div class="list-group">
@@ -293,7 +297,7 @@ if (isset($_POST['update'])) {
                       
                     </footer>
                     
-                  </section>
+                  </section> -->
                   
                 </section>
                 
@@ -329,7 +333,7 @@ if (isset($_POST['update'])) {
                   
                   <a href="create-project.php">
                     
-                    <i class="icon-time">
+                    <i class="icon-bolt">
                     </i>
                     
                     <span>
@@ -358,7 +362,7 @@ if (isset($_POST['update'])) {
                   
                   <a href="my-project.php">
                     
-                    <i class="icon-time">
+                    <i class="icon-picture">
                     </i>
                     
                     <span>
@@ -551,6 +555,19 @@ if (isset($_POST['update'])) {
                                             <div class="col-sm-4">
                                               
                                               <input type="text" name="twitter" placeholder="Twitter" value="<?php echo $row['twitter']; ?>" data-required="true" class="form-control parsley-validated">
+                                              
+                                            </div>
+                                            
+                                          </div>
+                                          <div class="form-group">
+                                            
+                                            <label class="col-sm-3 control-label">
+                                              PayPal
+                                            </label>
+                                            
+                                            <div class="col-sm-4">
+                                              
+                                              <input type="text" name="paypal" placeholder="PayPal" value="<?php echo $row['trans_type']; ?>" data-required="true" class="form-control parsley-validated">
                                               
                                             </div>
                                             

@@ -57,11 +57,11 @@ $result = mysql_query($get);
 
 							<ul class="dropdown-menu m-t-sm animated fadeInLeft"> 
 								<span class="arrow top"></span> 
-								<li> <a href="#">Settings</a> </li> 
+								<!-- <li> <a href="#">Settings</a> </li> 
 								<li> <a href="profile.html">Profile</a> </li> 
 								<li> <a href="#"> <span class="badge bg-danger pull-right">3</span> Notifications </a> </li> 
 								<li class="divider"></li> 
-								<li> <a href="docs.html">Help</a> </li> 
+								<li> <a href="docs.html">Help</a> </li>  -->
 								<li> <a href="logout.php">Logout</a> </li> 
 							</ul> 
 
@@ -72,15 +72,15 @@ $result = mysql_query($get);
 						</div> 
 
 						<div class="nav-msg"> 
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+							<!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 								<b class="badge badge-white count-n">2</b> 
-							</a> 
+							</a>  -->
 
 							<section class="dropdown-menu m-l-sm pull-left animated fadeInRight"> 
 								
 								<div class="arrow left"></div> 
 								
-								<section class="panel bg-white"> 
+								<!-- <section class="panel bg-white"> 
 									
 									<header class="panel-heading"> 
 										<strong>You have <span class="count-n">2</span> notifications</strong> 
@@ -109,7 +109,7 @@ $result = mysql_query($get);
 										</a> 
 										<a href="#">See all the notifications</a> 
 									</footer> 
-								</section> 
+								</section> --> 
 							</section> 
 						</div> 
 					</div> <!-- / user --> 
@@ -120,6 +120,8 @@ $result = mysql_query($get);
 							<li class="active"> <a href="index.php"> <i class="icon-eye-open"></i> <span>Discover</span> </a> </li> 
 							
 							<li> <a href="timeline.php"> <i class="icon-time"></i> <span>Timeline</span> </a> </li> 
+							<li> <a href="create-project.php"> <i class="icon-bolt"></i> <span>Create</span> </a> </li> 
+							<li> <a href="my-project.php"> <i class="icon-picture"></i> <span>My Poject</span> </a> </li> 
 						</ul> 
 					</nav> <!-- / nav --> <!-- note --> 
 					<div class="bg-danger wrapper hidden-vertical animated rollIn text-sm"> 
@@ -160,7 +162,7 @@ $result = mysql_query($get);
 						<div class="col-lg-8 panel b-r" style="padding: 0;">
 							<div class="padd">
 							<h2 id="title">
-								<a href="#"><?php echo $row['proj_name']; ?></a>
+								<a href="singleproject.php?id=<?php echo $row['id']; ?>"><?php echo $row['proj_name']; ?></a>
 							</h2>
 							<p id="subtitle">
 								<span class="creator">
@@ -175,7 +177,7 @@ $result = mysql_query($get);
 										$usr = mysql_fetch_array($result);
 									
 									?>
-									<a href="#" id="name" style="text-transform: uppercase;"><?php echo $usr['name']; ?></a>
+									<a href="author-bio.php?id=<?php echo $user_id; ?>" id="name" style="text-transform: uppercase;"><?php echo $usr['name']; ?></a>
 
 								</span>
 							</p>
@@ -244,7 +246,7 @@ $result = mysql_query($get);
 						<div class="col-lg-4">
 							<!-- <div class="panel-body" style="text-align: center;">  -->
 									<?php 
-										$backer = "";
+										// $backer = "";
 										$sql = "SELECT * FROM backer_table WHERE proj_id='$id'";
 										$result = mysql_query($sql);
 
@@ -266,7 +268,7 @@ $result = mysql_query($get);
 									</a>
 
 									<p>
-										This project will only be funded if at least $80,000 is pledged by Wednesday Jan 1, 3:53pm EST.
+										This project will only be funded if at least $ <?php echo $row['funded'];  ?> is pledged by <?php echo $row['duration_date']; ?> days.
 									</p>
 
 
