@@ -306,7 +306,7 @@ $result = mysql_query($sql);
                   
                   <a href="create-project.php">
                     
-                    <i class="icon-time">
+                    <i class="icon-bolt">
                     </i>
                     
                     <span>
@@ -335,7 +335,7 @@ $result = mysql_query($sql);
                   
                   <a href="my-project.php">
                     
-                    <i class="icon-time">
+                    <i class="icon-picture">
                     </i>
                     
                     <span>

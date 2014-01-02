@@ -268,7 +268,7 @@ $result = mysql_query($get);
 									</a>
 
 									<p>
-										This project will only be funded if at least $ <?php echo $row['funded'];  ?> is pledged by <?php echo $row['duration_date']; ?> days.
+										This project will only be funded if at least $ <?php echo $row['funded'] - $row['pledged_amount'];  ?> is pledged by <?php echo $row['duration_date']; ?> days.
 									</p>
 
 
