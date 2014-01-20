@@ -2,27 +2,13 @@
 session_start();
 require "config.php";
 
-if(isset($_GET['id'])) {
-  echo $proj_id = $_GET['id'];
+ if( ! isset($_SESSION['auth']) && $_SESSION['auth'] !=1 ) 
+  header('location:signin.php');
 
-  $sql = "SELECT user_id FROM backer_table WHERE proj_id='$proj_id'";
-  $result = mysql_query($sql);
+// if(isset($_GET['id'])) {
+  $proj_id = $_GET['id'];
 
-  while ($row = mysql_fetch_array($result)) {
-    $user_id = $row['user_id'];
-
-    $sql = "SELECT * FROM profile WHERE user_id='$user_id'";
-    $result = mysql_query($sql);
-
-    while ($row = mysql_fetch_array($result)) {
-      echo $row['name'];
-      echo $row['biography'];
-      echo $row['location'];
-      echo $row['fb'];
-      echo $row['twitter'];
-    }
-  }
-}
+ 
 
 
 ?>
@@ -442,59 +428,54 @@ if(isset($_GET['id'])) {
                   			<table class="table table-striped b-t text-sm"> 
                   				<thead>
                   					<tr>
-                  						<th>Name</th>
-                  						<!-- <th>Username</th>
-                  						<th>Email</th> -->
+                              <th>Name</th>
+                  						<th>Username</th>
+                  						<th>Biography</th>
+                  						<!--<th>Email</th> -->
                   						<th>Location</th>
                   						<th>Facebook</th>
-                  						<th>Twitter</th>
+                              <th>Twitter</th>
+                  						<th>Email</th>
                   					</tr>
                   				</thead>
 
                   				<tbody>
+                            <?php
+
+                               $sql = "SELECT user_id FROM backer_table WHERE proj_id='$proj_id'";
+                                $result = mysql_query($sql);
+
+                                while ($row = mysql_fetch_array($result)) {
+                                  $user_id = $row['user_id'];
+
+                                  // $query = "SELECT * FROM profile WHERE user_id='$user_id'";
+                                 $query = "SELECT * FROM profile LEFT JOIN user ON profile.user_id = user.id WHERE user_id='$user_id'";
+
+                                  $results = mysql_query($query);
+
+                                  while ($rows = mysql_fetch_array($results)) {
+                                    
+
+                      ?>
                   					<tr>
-                  						<?php
-											// while ($row = mysql_fetch_array($result)) {
-											// 	$each = $row['id'];
+                  						
 
-											// 	$sql = "SELECT user_id FROM backer_table WHERE proj_id='$each'";
-
-											// 	$result = mysql_query($sql);
-
-											// 	while ($row = mysql_fetch_array($result)) {
-											// 		$user_id = $row['user_id'];
-
-											// 		$sql = "SELECT * FROM profile WHERE user_id='$user_id'";
-
-											// 		$result = mysql_query($sql);
-
-											// 		$row = mysql_fetch_array($result);
-
-													// echo $row['name'];
-													// echo $row['location'];
-													// echo $row['fb'];
-													// echo $row['twitter'];
-
-											?>
-
-											<td><?php // echo $row['name']; ?></td>
-											<?php // echo $user_id = $row['user_id']; ?>
-											<?php 
-                  								// $usr = "SELECT * FROM user WHERE id='$user_id'";
-                  								// $rse = mysql_query($usr);
-
-                  								// $ins = mysql_fetch_array($res);
-
-                  							?>
-                  							<!-- <td><?php // echo $ins['username']; ?></td>
-                  							<td><?php // echo $ins['email']; ?></td> -->
-
-                  							
-                  							<td><?php // echo $row['location']; ?></td>
-                  							<td><?php // echo $row['fb']; ?></td>
-                  							<td><?php // echo $row['fb']; ?></td>
+                                <td><?php echo $rows['name']; ?></td>
+											          <td><?php echo $rows['username']; ?></td>
+                                <td><?php echo $rows['biography']; ?></td>
+                  							<td><?php echo $rows['location']; ?></td>
+                  							<td><?php echo $rows['fb']; ?></td>
+                                <td><?php echo $rows['fb']; ?></td>
+                  							<td><a href="mailto:<?php echo $rows['email']; ?>" target="_top"><?php echo $rows['email']; ?></a></td>
                   							
                   					</tr>
+
+                            <?php 
+
+                            }
+                          }
+
+            ?>
 
                   				</tbody>
 
@@ -503,12 +484,7 @@ if(isset($_GET['id'])) {
 
                   		</div>
                  
-                        <?php		
-
-						// 	}
-						// }
-
-						?>
+                        
                 	</section>
                           
                	</div>

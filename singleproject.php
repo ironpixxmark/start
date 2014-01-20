@@ -1,5 +1,7 @@
 <?php 
+session_start();
 require "config.php";
+
 $id = $_GET['id'];
 
 $get = "SELECT * FROM project WHERE id='$id'";
@@ -180,7 +182,10 @@ $result = mysql_query($get);
 									<a href="author-bio.php?id=<?php echo $user_id; ?>" id="name" style="text-transform: uppercase;"><?php echo $usr['name']; ?></a>
 
 								</span>
+								
+								<?php if( isset($_SESSION['auth']) && $_SESSION['auth'] ==1 ) : ?>
 								 / <a href="backer.php?id=<?php echo $row['id']; ?>">Show Backer Table</a>
+								<?php endif; ?>
 							</p>
 
 
@@ -267,7 +272,7 @@ $result = mysql_query($get);
 									<h2><small>Goal</small><br><strong>$<?php echo $row['funded']; ?></strong></h2>
 									<h1><strong><?php echo $row['duration_date'] ?></strong> <small>Days to go</small></h1>
 
-									<a href="https://paypal.com/" class="btn btn-lg btn-success">
+									<a href="https://www.paypal.com/" class="btn btn-lg btn-success">
 										Back This Project <br><small><span>$1</span> minimum pledge</small>
 									</a>
 
