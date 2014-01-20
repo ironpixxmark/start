@@ -180,7 +180,10 @@ $result = mysql_query($get);
 									<a href="author-bio.php?id=<?php echo $user_id; ?>" id="name" style="text-transform: uppercase;"><?php echo $usr['name']; ?></a>
 
 								</span>
+								 / <a href="backer.php?id=<?php echo $row['id']; ?>">Show Backer Table</a>
 							</p>
+
+
 
 						</div>
 							<img class="image-full" src="upload/<?php echo $row['proj_photo']; ?>" >
@@ -251,6 +254,7 @@ $result = mysql_query($get);
 										$result = mysql_query($sql);
 
 										$backer = mysql_num_rows($result);
+
 
 									?>
 									

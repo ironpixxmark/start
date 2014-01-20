@@ -1,10 +1,30 @@
 <?php 
 session_start();
 require "config.php";
-$user_id = $_SESSION['user_id'];
 
-$sql = "SELECT id FROM project WHERE user_id='$user_id'";
-$result = mysql_query($sql);
+if(isset($_GET['id'])) {
+  echo $proj_id = $_GET['id'];
+
+  $sql = "SELECT user_id FROM backer_table WHERE proj_id='$proj_id'";
+  $result = mysql_query($sql);
+
+  while ($row = mysql_fetch_array($result)) {
+    $user_id = $row['user_id'];
+
+    $sql = "SELECT * FROM profile WHERE user_id='$user_id'";
+    $result = mysql_query($sql);
+
+    while ($row = mysql_fetch_array($result)) {
+      echo $row['name'];
+      echo $row['biography'];
+      echo $row['location'];
+      echo $row['fb'];
+      echo $row['twitter'];
+    }
+  }
+}
+
+
 ?>
 <?php
 // while ($row = mysql_fetch_array($result)) {
@@ -434,21 +454,21 @@ $result = mysql_query($sql);
                   				<tbody>
                   					<tr>
                   						<?php
-											while ($row = mysql_fetch_array($result)) {
-												$each = $row['id'];
+											// while ($row = mysql_fetch_array($result)) {
+											// 	$each = $row['id'];
 
-												$sql = "SELECT user_id FROM backer_table WHERE proj_id='$each'";
+											// 	$sql = "SELECT user_id FROM backer_table WHERE proj_id='$each'";
 
-												$result = mysql_query($sql);
+											// 	$result = mysql_query($sql);
 
-												while ($row = mysql_fetch_array($result)) {
-													$user_id = $row['user_id'];
+											// 	while ($row = mysql_fetch_array($result)) {
+											// 		$user_id = $row['user_id'];
 
-													$sql = "SELECT * FROM profile WHERE user_id='$user_id'";
+											// 		$sql = "SELECT * FROM profile WHERE user_id='$user_id'";
 
-													$result = mysql_query($sql);
+											// 		$result = mysql_query($sql);
 
-													$row = mysql_fetch_array($result);
+											// 		$row = mysql_fetch_array($result);
 
 													// echo $row['name'];
 													// echo $row['location'];
@@ -457,7 +477,7 @@ $result = mysql_query($sql);
 
 											?>
 
-											<td><?php echo $row['name']; ?></td>
+											<td><?php // echo $row['name']; ?></td>
 											<?php // echo $user_id = $row['user_id']; ?>
 											<?php 
                   								// $usr = "SELECT * FROM user WHERE id='$user_id'";
@@ -466,13 +486,13 @@ $result = mysql_query($sql);
                   								// $ins = mysql_fetch_array($res);
 
                   							?>
-                  							<!-- <td><?php echo $ins['username']; ?></td>
-                  							<td><?php echo $ins['email']; ?></td> -->
+                  							<!-- <td><?php // echo $ins['username']; ?></td>
+                  							<td><?php // echo $ins['email']; ?></td> -->
 
                   							
-                  							<td><?php echo $row['location']; ?></td>
-                  							<td><?php echo $row['fb']; ?></td>
-                  							<td><?php echo $row['fb']; ?></td>
+                  							<td><?php // echo $row['location']; ?></td>
+                  							<td><?php // echo $row['fb']; ?></td>
+                  							<td><?php // echo $row['fb']; ?></td>
                   							
                   					</tr>
 
@@ -485,8 +505,8 @@ $result = mysql_query($sql);
                  
                         <?php		
 
-							}
-						}
+						// 	}
+						// }
 
 						?>
                 	</section>
